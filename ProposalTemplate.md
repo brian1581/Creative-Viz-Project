@@ -1,39 +1,37 @@
 # [Project Title]
-Creative Viz - Travel 
+Creative Viz - Portland AirBNB relative to housing costs 
 
 ## Project Topic
 
-
+AirBNB Portland dataset exploration
+1) Is popularity of portland AirBNB increaseing with time, 2015 to 2019? (we are going to explore reviews count by year)
+2) How is the average price of portland AirBNB changing over time?
+3) Compare prices of AirBNB and houselisting prices over time.
 
 ## Rationale 
 
-_Add a paragraph or two describing why this data is interesting or relevant to you and your audience. What do you want you audience to take away. Are there questions you're trying to answer? Note: this section is likely to change as you work with your data, but it's helpful to have an idea at this point._
-
+Housing costs in Portland can be a controversial subject, and one of the considerations of the demand for housing are short-term rentals like AirBNB and VRBO. The latter did not offer any data that we could find, but the former does. We intend to explore a by neighborhood view of the data and provide a year or year breakdown based on AirBNB reviews, listing prices and home listing prices in the Portland area.
 
 ## Data Sets
 
-Add a brief description of each of the data sources you will be using. Add links or screenshots where possible.
-
-[I'm an inline-style link](https://www.google.com)
-
-![alt text](url_or_path_for_image)
+Zillow API calls
+AirBNBs CSVs from Data World
+Potentially Yelp API calls (Time permitting)
+https://www.portlandmaps.com/metadata/index.cfm?&action=DisplayLayer&LayerID=54371
 
 
 ## Project Track & Stack
 
-Describe which category your final result will fit into. It's okay to be creative and diverge a bit, so let us know if that is the case.
-1. Creative d3 viz
-1. Use Libraries like plotly or leaflet to build multiple view of your data source
-1. Interative dashboard that builds multiple views from the same data
-1. ETL or Data processing on a Python server (must still have visualizations and interaction but they can be simpler than other projects) 
+- Describe which category your final result will fit into. It's okay to be creative and diverge a bit, so let us know if that is the case.
+- Creative d3 viz
+- Use Libraries like leaflet to build multiple views of your data source
+- ETL or Data processing on a Python server (Jupyter notebook) (must still have visualizations and interaction but they can be simpler than other projects) 
 
 What stack components are you going for?
-1. Back-end API server?
-1. Scraping script?
-1. ETL Script?
-1. Database? What kind?
-1. Front-end compenents html/css/js (Required)
-1. How will you deploy the project
+- ETL Script?
+- PostgreSQL Database?
+- Front-end compenents html/css/js (Required)
+- Deploy on Github
 
 
 ## Sketches & Inspiration
@@ -57,4 +55,4 @@ _Add 3 or 4 screenshots of relevant, “inspiring” visualizations that frame y
 
 ## OPTIONAL Work load organization
 
-This is not required but it may be helpful to think through at the beginning of your project. How will you divide up the work? How will you use git to colloborate? How will you prioritize tasks and deliverables? How will you track what needs to be done?
+We will divy up the components of the project based on how comfortable each member of the team is with it and consider strengths.
