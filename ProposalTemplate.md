@@ -42,7 +42,11 @@ _Add image(s) showing your proposed final design. This could be a mockup of a da
 
 ![alt text](path_for_image)
 
+![1-sketch](images/html.jpg)
+
 _Add 3 or 4 screenshots of relevant, “inspiring” visualizations that frame your creative fodder_
+
+![1-sketch](images/sketches.jpg)
 
 [I'm an inline-style link](https://www.google.com)
 
