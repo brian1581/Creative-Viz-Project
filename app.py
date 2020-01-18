@@ -10,6 +10,7 @@ import getpass
 import os as os
 
 pwd = getpass.getpass()
+app = Flask(__name__)
 
 def get_postgres(database_url):
     try:
@@ -24,7 +25,6 @@ def get_postgres(database_url):
 # pg_pwd = get_postgres("pwd")
 pg_db = "airbnb_db"
 
-app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'redis'
 # app.config['SESSION_REDIS'] = REDIS_URL
 # app.secret_key = get_postgres("SECRET_KEY")
@@ -43,8 +43,8 @@ app.config['sqlalchemy_track_mods'] = False # silence the deprecation warning
 #     login_id = db.Column(db.String(200), unique=False, nullable=True)
 #     login_token = db.Column(db.String(200), unique=False, nullable=True)
 
-def load_user(user_id):
-    return user.query.filter_by(login_id=user_id).first()
+# def load_user(user_id):
+#     return user.query.filter_by(login_id=user_id).first()
 
 @app.cli.command('resetdb')
 def db_reset():
