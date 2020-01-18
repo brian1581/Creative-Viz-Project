@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, jsonify
 import getpass
 from sqlalchemy import create_engine
 import pandas as pd
@@ -19,7 +19,7 @@ cur = conn.cursor(cursor_factory=RealDictCursor)
 
 
 
-@app.route("/")
+@app.route("/airbnb")
 def home():
     # airbnb = engine.execute("SELECT * FROM airbnb_portland").fetchall()
     data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
@@ -27,7 +27,9 @@ def home():
     airbnb = json.loads(data)
     # print(airbnb)
     print(airbnb)
-    return render_template("index.html", vacation=airbnb['data'])
+    print(jsonify(data))
+    # return render_template("index.html", vacation=airbnb['data'])
+    return jsonify(airbnb['data'])
 
 
 if __name__ == "__main__":
