@@ -14,23 +14,30 @@ p = getpass.getpass(prompt="Password: ")
 rds_connection_string = f"postgres:{p}@localhost:5432/airbnb_db"
 engine = create_engine(f'postgresql://{rds_connection_string}')
 
-conn = pg.connect(f"dbname=airbnb_db port=5432 user=postgres password={p}")
-cur = conn.cursor(cursor_factory=RealDictCursor)
+# conn = pg.connect(f"dbname=airbnb_db port=5432 user=postgres password={p}")
+# cur = conn.cursor(cursor_factory=RealDictCursor)
 
 
 
 @app.route("/airbnb")
 def home():
     # airbnb = engine.execute("SELECT * FROM airbnb_portland").fetchall()
+    
+    return render_template("index.html")
+    # return jsonify(airbnb['data'])
+
+
+@app.route("/data")
+def index():
     data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
-    cur.execute("select * from airbnb_portland limit 5;")
+    # cur.execute("select * from airbnb_portland limit 5;")
     airbnb = json.loads(data)
     # print(airbnb)
     print(airbnb)
     print(jsonify(data))
-    # return render_template("index.html", vacation=airbnb['data'])
     return jsonify(airbnb['data'])
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
