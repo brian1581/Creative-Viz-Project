@@ -19,7 +19,7 @@ engine = create_engine(f'postgresql://{rds_connection_string}')
 
 
 
-@app.route("/airbnb")
+@app.route("/")
 def home():
     # airbnb = engine.execute("SELECT * FROM airbnb_portland").fetchall()
     
@@ -27,7 +27,7 @@ def home():
     # return jsonify(airbnb['data'])
 
 
-@app.route("/data")
+@app.route("/data/airbnb")
 def index():
     data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
     # cur.execute("select * from airbnb_portland limit 5;")
