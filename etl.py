@@ -108,7 +108,7 @@ final_rental
 
 # In[12]:
 
-connect_string = os.eniron.get("DATABASE_URL")
+connect_string = os.environ.get("DATABASE_URL")
 
 # p = getpass.getpass(prompt="Password: ")
 # rds_connection_string = f"postgres:{p}@localhost:5432/airbnb_db"
