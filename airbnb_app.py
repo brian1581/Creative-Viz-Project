@@ -12,44 +12,64 @@ app = Flask(__name__)
 
 p = getpass.getpass(prompt="Password: ")
 rds_connection_string = f"postgres:{p}@localhost:5432/airbnb_db"
-engine = create_engine(f'postgresql://{rds_connection_string}')
+# engine = create_engine(f'postgresql://{rds_connection_string}')
+DATABASE_URL = "postgres://gtttqtxcivlqiv:2af955aeb6ab9bae63664bf73ab76e524ad55b3296e7c22e773536ed1d75f357@ec2-3-224-165-85.compute-1.amazonaws.com:5432/d4cjuuq2jmullg"
+engine = create_engine(DATABASE_URL)
 
-# conn = pg.connect(f"dbname=airbnb_db port=5432 user=postgres password={p}")
-# cur = conn.cursor(cursor_factory=RealDictCursor)
+
+
 
 
 
 @app.route("/")
 def home():
-    # airbnb = engine.execute("SELECT * FROM airbnb_portland").fetchall()
+    
     
     return render_template("index.html")
-    # return jsonify(airbnb['data'])
+    
 
 
 @app.route("/data/airbnb")
 def index():
-    data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
+    data = pd.read_sql("select * from airbnb_portland;", con=engine).to_json(index=False,orient="table")
     airbnb = json.loads(data)
-    # print(airbnb)
-    # print(jsonify(data))
+   
     return jsonify(airbnb['data'])
 
 @app.route("/data/rentals")
 def rent():
-    rent = pd.read_sql("select * from rentals limit 5;", con=engine).to_json(index=False,orient="table")
-    rentals = json.loads(data)
-    # print(rentals)
-    # print(jsonify(rent))
-    return jsonify(rentals['rent'])
+    rent = pd.read_sql("select * from rentals;", con=engine).to_json(index=False,orient="table")
+    rentals = json.loads(rent)
+   
+    return jsonify(rentals['data'])
 
 @app.route("/data/listings")
-def list():
+def price():
+    price = pd.read_sql("select * from listings;", con=engine).to_json(index=False,orient="table")
+    listings = json.loads(price)
+   
+    return jsonify(listings['data'])
+
+@app.route("/demo/airbnb")
+def demo_index():
+    data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
+    airbnb = json.loads(data)
+    
+    return jsonify(airbnb['data'])
+
+@app.route("/demo/rentals")
+def demo_rent():
+    rent = pd.read_sql("select * from rentals limit 5;", con=engine).to_json(index=False,orient="table")
+    rentals = json.loads(rent)
+    
+    return jsonify(rentals['data'])
+
+@app.route("/demo/listings")
+def demo_price():
     price = pd.read_sql("select * from listings limit 5;", con=engine).to_json(index=False,orient="table")
-    listings = json.loads(data)
-    # print(listings)
-    # print(jsonify(price))
-    return jsonify(listings['price'])
+    listings = json.loads(price)
+    
+    return jsonify(listings['data'])
 
 
 if __name__ == "__main__":
