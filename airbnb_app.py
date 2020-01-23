@@ -30,29 +30,25 @@ def home():
 @app.route("/data/airbnb")
 def index():
     data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
-    # cur.execute("select * from airbnb_portland limit 5;")
     airbnb = json.loads(data)
     # print(airbnb)
-    print(airbnb)
-    print(jsonify(data))
+    # print(jsonify(data))
     return jsonify(airbnb['data'])
 
 @app.route("/data/rentals")
 def rent():
     rent = pd.read_sql("select * from rentals limit 5;", con=engine).to_json(index=False,orient="table")
-    # cur.execute("select * from rentals limit 5;")
     rentals = json.loads(data)
-    print(rentals)
-    print(jsonify(rent))
+    # print(rentals)
+    # print(jsonify(rent))
     return jsonify(rentals['rent'])
 
 @app.route("/data/listings")
 def list():
     price = pd.read_sql("select * from listings limit 5;", con=engine).to_json(index=False,orient="table")
-    # cur.execute("select * from listings limit 5;")
     listings = json.loads(data)
-    print(listings)
-    print(jsonify(price))
+    # print(listings)
+    # print(jsonify(price))
     return jsonify(listings['price'])
 
 
