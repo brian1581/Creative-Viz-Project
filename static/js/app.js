@@ -1,10 +1,3 @@
-<<<<<<< Updated upstream
-
-
-d3.json("/data",function(data) {
-    console.log(data);
-})
-=======
 // @TODO: YOUR CODE HERE!
 var svgWidth = 450;
 var svgHeight = 400;
@@ -206,4 +199,3 @@ d3.csv("data/Price.csv", function (airbnbData) {
         .attr("class", "aText")
         .text("Year");
 });
->>>>>>> Stashed changes
