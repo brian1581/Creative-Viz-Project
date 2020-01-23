@@ -9,12 +9,12 @@ from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
-
-p = getpass.getpass(prompt="Password: ")
-rds_connection_string = f"postgres:{p}@localhost:5432/airbnb_db"
+connect_string = os.eniron.get("DATABASE_URL")
+# p = getpass.getpass(prompt="Password: ")
+# rds_connection_string = f"postgres:{p}@localhost:5432/airbnb_db"
 # engine = create_engine(f'postgresql://{rds_connection_string}')
-DATABASE_URL = "postgres://gtttqtxcivlqiv:2af955aeb6ab9bae63664bf73ab76e524ad55b3296e7c22e773536ed1d75f357@ec2-3-224-165-85.compute-1.amazonaws.com:5432/d4cjuuq2jmullg"
-engine = create_engine(DATABASE_URL)
+# DATABASE_URL = "postgres://gtttqtxcivlqiv:2af955aeb6ab9bae63664bf73ab76e524ad55b3296e7c22e773536ed1d75f357@ec2-3-224-165-85.compute-1.amazonaws.com:5432/d4cjuuq2jmullg"
+engine = create_engine(connect_string)
 
 
 
