@@ -18,31 +18,31 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Import data from an external CSV file
-d3.csv("data.csv").then(function(smurfData) {
-  console.log(smurfData);
-  console.log([smurfData]);
+d3.csv("").then(function(rentalData) {
+  console.log(rentalData);
+  console.log([rentalData]);
 
   // Create a function to parse date and time
-  var parseTime = d3.timeParse("%d-%b-%Y");
+  var parseTime = d3.timeParse("%b-%Y");
 
   // Format the data
-  smurfData.forEach(function(data) {
-    data.date = parseTime(data.date);
-    data.dow_index = +data.dow_index;
-    data.smurf_sightings = +data.smurf_sightings;
+  smurfData.forEach(function(d) {
+    d.date = parseTime(d.date);
+    d.rentData = +d.rentData;
+    d.listData = +data.listData;
   });
 
   // Create scaling functions
   var xTimeScale = d3.scaleTime()
-    .domain(d3.extent(smurfData, d => d.date))
+    .domain(d3.extent(rentalData, d => d.date))
     .range([0, width]);
 
   var yLinearScale1 = d3.scaleLinear()
-    .domain([0, d3.max(smurfData, d => d.dow_index)])
+    .domain([0, d3.max(rentalData, d => d.dow_index)])
     .range([height, 0]);
 
   var yLinearScale2 = d3.scaleLinear()
-    .domain([0, d3.max(smurfData, d => d.smurf_sightings)])
+    .domain([0, d3.max(rentalData, d => d.smurf_sightings)])
     .range([height, 0]);
 
   // Create axis functions
@@ -79,13 +79,13 @@ d3.csv("data.csv").then(function(smurfData) {
 
   // Append a path for line1
   chartGroup.append("path")
-    .data([smurfData])
+    .data([rentalData])
     .attr("d", line1)
     .classed("line green", true);
 
   // Append a path for line2
   chartGroup.append("path")
-    .data([smurfData])
+    .data([rentalData])
     .attr("d", line2)
     .classed("line blue", true);
 
@@ -93,12 +93,12 @@ d3.csv("data.csv").then(function(smurfData) {
   chartGroup.append("text")
   .attr("transform", `translate(${width / 2}, ${height + margin.top + 20})`)
     .classed("dow-text text", true)
-    .text("Sale Listings");
+    .text("Rental Listings");
 
   chartGroup.append("text")
   .attr("transform", `translate(${width / 2}, ${height + margin.top + 37})`)
     .classed("smurf-text text", true)
-    .text("Rental Listings");
+    .text("Sale Listings");
 }).catch(function(error) {
   console.log(error);
 });
