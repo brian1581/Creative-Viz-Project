@@ -37,6 +37,26 @@ def index():
     print(jsonify(data))
     return jsonify(airbnb['data'])
 
+@app.route("/data/rentals")
+def rent():
+    data = pd.read_sql("select * from rentals limit 5;", con=engine).to_json(index=False,orient="table")
+    # cur.execute("select * from rentals limit 5;")
+    rentals = json.loads(data)
+    # print(airbnb)
+    print(rentals)
+    print(jsonify(data))
+    return jsonify(rentals['data'])
+
+@app.route("/data/listings")
+def list():
+    data = pd.read_sql("select * from listings limit 5;", con=engine).to_json(index=False,orient="table")
+    # cur.execute("select * from listings limit 5;")
+    listings = json.loads(data)
+    # print(airbnb)
+    print(listings)
+    print(jsonify(data))
+    return jsonify(listings['data'])
+
 
 if __name__ == "__main__":
     app.run(debug=True)
