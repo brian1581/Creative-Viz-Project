@@ -3,8 +3,8 @@ var svgWidth = 450;
 var svgHeight = 400;
 
 var margin = {
-    top: 20,
-    right: 10,
+    top: 50,
+    right: 50,
     bottom: 80,
     left: 60
 };
@@ -25,6 +25,13 @@ var bottomAxis = d3.svg.axis().scale(xScale)
 
 var leftAxis = d3.svg.axis().scale(yScale)
     .orient("left").ticks(8);
+
+
+//This is empty space for map
+var svg1 = d3.select("#map")
+    .append('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
 
 //Review vs date
 //create svg wrapper and append svg group
@@ -103,7 +110,7 @@ d3.csv("data/Reviews.csv", function (airbnbData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "aText")
-        .text("Mean reviews");
+        .text("Average reviews count");
 
     chartGroup1.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
@@ -192,10 +199,82 @@ d3.csv("data/Price.csv", function (airbnbData) {
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "aText")
-        .text("Mean price (US $)");
+        .text("Average price (US $)");
 
     chartGroup2.append("text")
         .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
         .attr("class", "aText")
         .text("Year");
 });
+
+//day-of-week vs price
+var svg3 = d3.select("#chart3")
+    .append('svg')
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
+
+var chartGroup3 = svg3.append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+// Append a div to the body to create tooltips, assign it a class
+d3.select("body").append("div").attr("class", "d3-tip");
+// Step 3:
+// Import data from the All_airbnb_listings.csv file
+// =================================
+d3.csv("data/day_week.csv", function (airbnbData) {
+    airbnbData.forEach(function (data) {
+        data.price = +data.price;
+        console.log(data.price)
+    });
+
+    var xBandScale = d3.scale.ordinal()
+    .domain(airbnbData.map(d => d.weekday))
+    .rangeRoundBands([0, width], .1);
+
+  // Create a linear scale for the vertical axis.
+    var yLinearScale = d3.scale.linear()
+    .domain([0, d3.max(airbnbData, d => d.price)])
+    .range([height, 0]);
+
+    var bottomAxis = d3.svg.axis()
+    .scale(xBandScale)
+    .orient("bottom");
+
+    var leftAxis = d3.svg.axis()
+    .scale(yLinearScale)
+    .orient("left")
+
+  // Append two SVG group elements to the chartGroup area,
+  // and create the bottom and left axes inside of them
+  chartGroup3.append("g")
+    .call(leftAxis);
+
+  chartGroup3.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(bottomAxis)
+    .selectAll("text")
+    .style("text-anchor", "start")
+    .attr("xBandScale",9)
+    .attr("transform", "rotate(45)")
+
+  // Create one SVG rectangle per piece of tvData
+  // Use the linear and band scales to position each rectangle within the chart
+  chartGroup3.selectAll(".bar")
+    .data(airbnbData)
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", d => xBandScale(d.weekday))
+    .attr("y", d => yLinearScale(d.price))
+    .attr("width", xBandScale.rangeBand())
+    .attr("height", d => height - yLinearScale(d.price));
+
+    chartGroup3.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left - 4)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .attr("class", "aText")
+    .text("Average price (US $)");
+
+});
+
