@@ -29,7 +29,7 @@ def home():
 
 @app.route("/data/airbnb")
 def index():
-    data = pd.read_sql("select * from airbnb_portland limit 5;", con=engine).to_json(index=False,orient="table")
+    data = pd.read_sql("select * from airbnb_portland;", con=engine).to_json(index=False,orient="table")
     airbnb = json.loads(data)
     # print(airbnb)
     # print(jsonify(data))
