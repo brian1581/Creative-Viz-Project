@@ -1,3 +1,10 @@
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
 /* remove default margin and padding from body */
 body {
   padding: 0;
@@ -10,4 +17,5 @@ body,
 html {
   height: 100%;
 }
+
 
