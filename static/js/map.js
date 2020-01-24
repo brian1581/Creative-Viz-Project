@@ -24,13 +24,13 @@ function createFeatures(neighborhoodData) {
             mouseover: function (event) {
                 layer = event.target;
                 layer.setStyle({
-                    fillOpacity: 0.9
+                    fillOpacity: 0
                 });
             },
             mouseout: function (event) {
                 layer = event.target;
                 layer.setStyle({
-                    fillOpacity: 0.2
+                    fillOpacity: 0
                 });
             }
         }).bindPopup(`<h3>${feature.properties.MAPLABEL}</h3>`)
