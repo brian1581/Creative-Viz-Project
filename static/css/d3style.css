@@ -31,7 +31,7 @@
 }
 
 .stateCircle {
-  fill: green;
+  fill:darkturquoise;
   stroke: black;
 }
 
@@ -58,12 +58,23 @@
 }
 
 .orange {
-  stroke: orange;
+  stroke:coral;
 }
 
 .green {
-  stroke: green;
+  stroke:#0080ff;
 }
+
+.bar {
+  fill: #0080ff;
+  
+}
+
+
+.bar:hover {
+  fill:darkturquoise;
+}
+
 
 
 /* Mobile Rules */
