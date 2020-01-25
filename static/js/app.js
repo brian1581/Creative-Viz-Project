@@ -13,7 +13,7 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 //funtion to pase date
-var parseDate = d3.time.format("%Y-%m-%d").parse
+var parseDate = d3.timeParse("%Y-%m-%d");
 
 //set ranges
 var xScale = d3.time.scale().range([0, width]);
@@ -47,12 +47,19 @@ d3.select("body")
     .append("div")
     .attr("class", "d3-tip")
 d3.json("/data/airbnb_reviews", function (airbnbData) {
+    // console.log(airbnbData);
+    // var parseDate = d3.timeParse("%Y-%m-%d");
     airbnbData.forEach(function (data) {
+       
         data.reviews = +data.reviews;
-        data.date = parseDate(data.date)
+
+        data.date = parseDate(data.date);
+        console.log(data.date); 
+
     });
     //domain
-    xScale.domain([new Date("2015-03-01"), new Date("2020-02-01")])
+    // console.log(d3.min(airbnbData, d=> d.date))
+    xScale.domain(d3.extent(airbnbData, d=> d.date))
     yScale.domain([0, d3.max(airbnbData, d => d.reviews)])
 
 
@@ -222,8 +229,9 @@ d3.select("body").append("div").attr("class", "d3-tip");
 d3.json("/data/price_by_day_of_week", function (airbnbData) {
     airbnbData.forEach(function (data) {
         data.price = +data.price;
-        console.log(data.price)
+        // console.log(data.price)
     });
+    // console.log(airbnbData);
 
     var xBandScale = d3.scale.ordinal()
     .domain(airbnbData.map(d => d.weekday))

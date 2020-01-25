@@ -22,7 +22,7 @@ engine = create_engine(f'postgresql://{rds_connection_string}')
 @app.route("/")
 def home():
     
-    return render_template("index.html")
+    return render_template("d3landing.html")
 
 
 @app.route("/data/airbnb")

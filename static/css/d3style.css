@@ -75,10 +75,12 @@
   fill:darkturquoise;
 }
 
-#map,
-body,
-html {
-  height: 100%;
+#map {
+  position: relative;
+  /* height: 400px;
+  width: 450px; */
+  height:100%;
+  width:100%;
 }
 
 
