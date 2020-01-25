@@ -23,7 +23,7 @@ function createMap(neighborhoodData, airbnbData,roomData) {
     }
 
     var overlayMaps = {
-        "Neighborhood Boundaries": neighborhoods,
+        "Neighbourhood Boundaries": neighborhoods,
         "Airbnb Listings": airbnbListings
     }
 
