@@ -17,12 +17,25 @@ engine = create_engine(f'postgresql://{rds_connection_string}')
 # conn = pg.connect(f"dbname=airbnb_db port=5432 user=postgres password={p}")
 # cur = conn.cursor(cursor_factory=RealDictCursor)
 
-
-
 @app.route("/")
 def home():
     
     return render_template("d3landing.html")
+
+@app.route("/reviews")
+def reviews_path():
+    
+    return render_template("Reviews.html")
+
+@app.route("/price")
+def cost():
+    
+    return render_template("Price.html")
+
+@app.route("/location")
+def location():
+    
+    return render_template("location.html")
 
 
 @app.route("/data/airbnb")
