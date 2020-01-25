@@ -21,7 +21,7 @@ We wanted to be able to host our project on Heroku, however, the size of our Pos
 
 One area to improve would be to clean or remove all the data which has a value of zero. In addition, we would add a slider to the AirBNB Listing v Rent/Own chart.
 The questions that we wanted to answer according to our proposal are
-1. Is popularity of portland AirBNB increaseing with time, 2015 to 2019? 
+1. Is popularity of portland AirBNB increasing with time, 2015 to 2019? 
 * For this, we used airbnb review trend over years. 
 2. How is the average price of portland AirBNB changing over time?
 * To plot average price of portland AirBNB changing over time , to make the graph informative we had to find mean price in each year.
