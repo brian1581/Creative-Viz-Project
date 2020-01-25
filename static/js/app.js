@@ -13,7 +13,9 @@ var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
 //funtion to pase date
-var parseDate = d3.timeParse("%Y-%m-%d");
+var parseDate = d3.timeParse("%Y-%m-%dT00:00:00.000Z");
+var formatter = d3.time.format("%Y-%m-%d");
+
 
 //set ranges
 var xScale = d3.time.scale().range([0, width]);
@@ -37,8 +39,9 @@ var svg1 = d3.select("#map")
 //create svg wrapper and append svg group
 var svg1 = d3.select("#chart1")
     .append('svg')
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 450 400")
+    .classed("svg-content", true);
 
 var chartGroup1 = svg1.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -47,19 +50,14 @@ d3.select("body")
     .append("div")
     .attr("class", "d3-tip")
 d3.json("/data/airbnb_reviews", function (airbnbData) {
-    // console.log(airbnbData);
-    // var parseDate = d3.timeParse("%Y-%m-%d");
     airbnbData.forEach(function (data) {
        
         data.reviews = +data.reviews;
-
         data.date = parseDate(data.date);
-        console.log(data.date); 
 
     });
     //domain
-    // console.log(d3.min(airbnbData, d=> d.date))
-    xScale.domain(d3.extent(airbnbData, d=> d.date))
+    xScale.domain([new Date("2015-03-01"), new Date("2020-02-01")])
     yScale.domain([0, d3.max(airbnbData, d => d.reviews)])
 
 
@@ -129,8 +127,9 @@ d3.json("/data/airbnb_reviews", function (airbnbData) {
 
 var svg2 = d3.select("#chart2")
     .append('svg')
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 450 400")
+    .classed("svg-content", true);
 
 var chartGroup2 = svg2.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -216,8 +215,9 @@ d3.json("/data/airbnb_portland_mean_prices", function (airbnbData) {
 //day-of-week vs price
 var svg3 = d3.select("#chart3")
     .append('svg')
-    .attr("width", svgWidth)
-    .attr("height", svgHeight);
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 450 400")
+    .classed("svg-content", true);
 
 var chartGroup3 = svg3.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
@@ -229,9 +229,7 @@ d3.select("body").append("div").attr("class", "d3-tip");
 d3.json("/data/price_by_day_of_week", function (airbnbData) {
     airbnbData.forEach(function (data) {
         data.price = +data.price;
-        // console.log(data.price)
     });
-    // console.log(airbnbData);
 
     var xBandScale = d3.scale.ordinal()
     .domain(airbnbData.map(d => d.weekday))
