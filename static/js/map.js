@@ -61,7 +61,9 @@ function createMap(neighborhoodData, airbnbData,roomData) {
         if (hood["Hotel room"]) {
             rooms.push({num: hood["Hotel room"], label: "Hotel room"})
         }
-        var new_pie = L.pie([hood['lat'],hood['long']], rooms).bindPopup(`${index}`);
+        var new_pie = L.pie([hood['lat'],hood['long']], rooms,
+        { colors: ['#00F', '#000', '#F00', '#0F0']}
+        ).bindPopup(`${index}`);
     pies.push([index,new_pie]);
     });
 
@@ -86,46 +88,40 @@ function createMap(neighborhoodData, airbnbData,roomData) {
     legend.addTo(map);
     
     map.addLayer(airbnbListings);
-    // pies.forEach(pie => map.addLayer(pie[1]));
+    
     
     var current_pie = ''
-    d3.select("select").on("change",function(event) {
+    d3.select("select").on("click",function(event) {
         var selected = d3.select(this)
-            // .select("#pie-option")
             .property("value");
+        map.removeLayer(airbnbListings);
+        var last_layer = ''
+
+        if (last_layer !== '') {
+            map.removeLayer(last_layer);
+        };  
         
-        console.log(selected);
         pies.forEach(pie => {
-            // map.clearLayers();
+           
             
             if (pie[0].replace(" ","_") === selected) {
-                map.addLayer(pie[1]);
+                last_layer = map.addLayer(pie[1]);
             }
             if (pie[0].replace(" ","_") === current_pie) {
+                
                 map.removeLayer(pie[1]);
             }
-            // if (selected !== "none") {
-                
-            // }
+
             current_pie = selected;
-            // console.log(layers);
+            
         })
         map.removeLayer(pies)
     })
+    
     map.on("layeradd", function(e) {
-        // Handle only marker layers
-        current_pie = e.layer.options.value;
-        // console.log(e.layer.options.value);
-        if((e.layer.options.id != "markerLayer1") && (e.layer.options.id != "markerLayer2")) {
-        return;
-      }
-    
-      // For the currently added layer (which is one with markers)
-      // get all its layers
-      var markers = e.layer.getLayers();
-    
 
-      
+        current_pie = e.layer.options.value;
+     
       
     });
 
@@ -141,7 +137,8 @@ function createFeatures(neighborhoodData) {
     };
 
         var neighborhoods = L.geoJSON(neighborhoodData, {
-            style: {fillOpacity: 0},
+            style: {fillOpacity: 0,
+                color: "lightseagreen"},
             onEachFeature: onEachFeature
         });
 
