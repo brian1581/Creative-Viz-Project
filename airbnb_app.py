@@ -21,34 +21,36 @@ engine = create_engine(f'postgresql://{rds_connection_string}')
 
 @app.route("/")
 def home():
-    # airbnb = engine.execute("SELECT * FROM airbnb_portland").fetchall()
     
     return render_template("index.html")
-    # return jsonify(airbnb['data'])
 
 
 @app.route("/data/airbnb")
 def index():
     data = pd.read_sql("select * from airbnb_portland;", con=engine).to_json(index=False,orient="table")
     airbnb = json.loads(data)
-    # print(airbnb)
-    # print(jsonify(data))
+    
     return jsonify(airbnb['data'])
+
+@app.route("/data/airbnb_rooms")
+def rooms():
+    data = pd.read_sql("select * from airbnb_portland;", con=engine).to_json(index=False,orient="table")
+    rooms = json.loads(data)
+
+    return jsonify(rooms['data'])
 
 @app.route("/data/rentals")
 def rent():
-    rent = pd.read_sql("select * from rentals limit 5;", con=engine).to_json(index=False,orient="table")
+    rent = pd.read_sql("select * from rentals;", con=engine).to_json(index=False,orient="table")
     rentals = json.loads(data)
-    # print(rentals)
-    # print(jsonify(rent))
+  
     return jsonify(rentals['rent'])
 
 @app.route("/data/listings")
-def list():
-    price = pd.read_sql("select * from listings limit 5;", con=engine).to_json(index=False,orient="table")
+def listings():
+    price = pd.read_sql("select * from listings;", con=engine).to_json(index=False,orient="table")
     listings = json.loads(data)
-    # print(listings)
-    # print(jsonify(price))
+ 
     return jsonify(listings['price'])
 
 
