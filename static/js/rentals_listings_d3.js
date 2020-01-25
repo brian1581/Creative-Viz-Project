@@ -19,7 +19,7 @@ d3.json("/data/airbnb_portland_mean_prices").then(airbnbData => {
       console.log(airbnbData);
       // console.log(rentalData);
       // console.log(listingData);
-      console.log(air)
+      // console.log(air)
       var parseMonth = d3.timeParse("%Y-%m-%dT00:00:00.000Z").parse;
       var parseDate = d3.timeParse("%Y-%m");
 
@@ -29,26 +29,26 @@ d3.json("/data/airbnb_portland_mean_prices").then(airbnbData => {
       //       d.rentalData = +d.rentalData;
       //       d.listingData = +data.listingData;
       // });
-      var neighborhoods = []
-      listingData.forEach(own => {
-        console.log(own.Neighborhood);
-        hood = own.Neighborhood;
-        if (neighborhoods.includes(hood)) {
-          console.log(`${hood} already included`);
-        } else {
-          neighborhoods.push(hood);
-          console.log(`Added ${hood}`)
-        };
+      // var neighborhoods = []
+      // listingData.forEach(own => {
+      //   console.log(own.Neighborhood);
+      //   hood = own.Neighborhood;
+      //   // if (neighborhoods.includes(hood)) {
+      //   //   // console.log(`${hood} already included`);
+      //   // } else {
+      //   //   neighborhoods.push(hood);
+      //     // console.log(`Added ${hood}`)
+      //   };
         // const keys = Object.entries(listingData)
         //   for (const entry of entries) {
         //   console.log(key)
         // }
 
-        var filteredAir = airbnbData.filter(item => neighborhoods.includes(item.neighbourhood));
-        console.log(filteredAir);
-        var filteredRent = rentalData.filter(item => neighborhoods.includes(item.Neighborhood));
-        console.log(filteredRent)
-      });
+      //   var filteredAir = airbnbData.filter(item => neighborhoods.includes(item.neighbourhood));
+      //   console.log(filteredAir);
+      //   var filteredRent = rentalData.filter(item => neighborhoods.includes(item.Neighborhood));
+      //   console.log(filteredRent)
+      // });
 
       // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
       var svg = d3.select(".chart")
