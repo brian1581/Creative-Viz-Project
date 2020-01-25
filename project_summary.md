@@ -19,11 +19,11 @@ We wanted to be able to host our project on Heroku, however, the size of our Pos
 
 One area to improve would be to clean or remove all the data which has a value of zero. In addition, we would add a slider to the AirBNB Listing v Rent/Own chart.
 The questions that we wanted to answer according to our proposal are
-1. Is popularity of portland AirBNB increaseing with time, 2015 to 2019? 
+1. Is popularity of portland AirBNB increasing with time, 2015 to 2019? 
 * For this, we used airbnb review trend over years. 
 2. How is the average price of portland AirBNB changing over time?
 * To plot average price of portland AirBNB changing over time , to make the graph informative we had to find mean price in each year.
-3. Compare prices of AirBNB and houselisting prices over time.
+3. Compare prices of AirBNB and house listing prices over time.
 * We used d3.js to plot all the graphs.Combining different persons codes to single .js file was also a challenge. 
 
 Leaflet library is used to get the map on our web page.  Marker clusters were used to show density of listings for the most recent data we have available.  Neighborhood boundaries were included to be able to see visually which neighborhood a listing was in.  Pie charts were added to neighborhoods to show the distribution of room types available in that neighborhood.
