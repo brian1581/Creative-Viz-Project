@@ -46,7 +46,7 @@ var chartGroup1 = svg1.append("g")
 d3.select("body")
     .append("div")
     .attr("class", "d3-tip")
-d3.csv("../data/Reviews.csv", function (airbnbData) {
+d3.json("/data/airbnb_reviews", function (airbnbData) {
     airbnbData.forEach(function (data) {
         data.reviews = +data.reviews;
         data.date = parseDate(data.date)
@@ -132,7 +132,7 @@ d3.select("body").append("div").attr("class", "d3-tip");
 // Step 3:
 // Import data from the All_airbnb_listings.csv file
 // =================================
-d3.csv("../data/Price.csv", function (airbnbData) {
+d3.json("/data/airbnb_portland_mean_prices", function (airbnbData) {
     airbnbData.forEach(function (data) {
         data.price = +data.price;
         data.date = parseDate(data.date)
@@ -219,7 +219,7 @@ d3.select("body").append("div").attr("class", "d3-tip");
 // Step 3:
 // Import data from the All_airbnb_listings.csv file
 // =================================
-d3.csv("../data/day_week.csv", function (airbnbData) {
+d3.json("/data/price_by_day_of_week", function (airbnbData) {
     airbnbData.forEach(function (data) {
         data.price = +data.price;
         console.log(data.price)

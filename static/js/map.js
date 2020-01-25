@@ -65,6 +65,7 @@ function createClusters(airbnbData) {
 
 d3.json(neighborhoodsURL, function (neighborhoodData) {
     d3.json("/data/airbnb", function(airbnbData) {
+        // d3.json("/data/airbnb_rooms")
         console.log(neighborhoodData);
         createFeatures(neighborhoodData);
         console.log(airbnbData);

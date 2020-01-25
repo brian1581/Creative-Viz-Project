@@ -34,7 +34,35 @@ def index():
 
 @app.route("/data/airbnb_rooms")
 def rooms():
-    data = pd.read_sql("select * from airbnb_portland;", con=engine).to_json(index=False,orient="table")
+    data = pd.read_sql("select * from airbnb_room_tpyes;", con=engine).to_json(index=False,orient="table")
+    rooms = json.loads(data)
+
+    return jsonify(rooms['data'])
+
+@app.route("/data/airbnb_mean_prices")
+def mean_price():
+    data = pd.read_sql("select * from airbnb_mean_prices;", con=engine).to_json(index=False,orient="table")
+    rooms = json.loads(data)
+
+    return jsonify(rooms['data'])
+
+@app.route("/data/airbnb_reviews")
+def reviews():
+    data = pd.read_sql("select * from airbnb_reviews;", con=engine).to_json(index=False,orient="table")
+    rooms = json.loads(data)
+
+    return jsonify(rooms['data'])
+
+@app.route("/data/price_by_day_of_week")
+def reviews_DoW():
+    data = pd.read_sql("select * from airbnb_price_by_day_of_week;", con=engine).to_json(index=False,orient="table")
+    rooms = json.loads(data)
+
+    return jsonify(rooms['data'])
+
+@app.route("/data/airbnb_portland_mean_prices")
+def portland_mean():
+    data = pd.read_sql("select * from airbnb_portland_mean_price;", con=engine).to_json(index=False,orient="table")
     rooms = json.loads(data)
 
     return jsonify(rooms['data'])
