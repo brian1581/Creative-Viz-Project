@@ -29,19 +29,19 @@ d3.json("/data/airbnb_mean_prices").then(airbnbData => {
           console.log(own.Neighborhood);
           hood = own.Neighborhood;
           if (neighborhoods.includes(hood)) {
-            console.log(`${hood} was already included`);
+            console.log(`${hood} already included`);
           } else {
             neighborhoods.push(hood);
-            console.log(`Added ${hood}`);
+            console.log(`Added ${hood}`)};
+      // const keys = Object.entries(listingData)
+      //   for (const entry of entries) {
+      //   console.log(key)
+      // }
 
       var filteredAir = airbnbData.filter(item => neighborhoods.includes(item.neighbourhood));
             console.log(filteredAir);
       var filteredRent = rentalData.filter(item => neighborhoods.includes(item.Neighborhood));
-            console.log(filteredRent)
-
-
-
-
+            console.log(filteredRent)});
 
 // Create an SVG wrapper, append an SVG group that will hold our chart, and shift the latter by left and top margins.
 var svg = d3.select(".chart")
@@ -132,10 +132,10 @@ var chartGroup = svg.append("g")
 
     // Create Circles
     var circlesGroup = chartGroup.selectAll("circle")
-    .data(data)
+    .data(airbnbData)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(d.airData))
+    .attr("cx", d => xLinearScale(d.airbnbData))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", "10")
     .attr("fill", "green")
@@ -168,7 +168,7 @@ var chartGroup = svg.append("g")
     .classed("axis-text", true)
     .text("AirBNB Rates by Month and Year");
 
-    var circles = updateToolTip(chosenXAxis, circlesGroup);
+    var circles = updateToolTip(chosenYAxis, circlesGroup);
     
     // y axis labels event listener
   labelsGroup.selectAll("text")
@@ -215,8 +215,6 @@ var chartGroup = svg.append("g")
       }
     }
   });
-};
-});
 })
 })
 });

@@ -83,16 +83,16 @@ def portland_mean():
 @app.route("/data/rentals")
 def rent():
     rent = pd.read_sql("select * from rentals;", con=engine).to_json(index=False,orient="table")
-    rentals = json.loads(data)
+    rentals = json.loads(rent)
   
-    return jsonify(rentals['rent'])
+    return jsonify(rentals['data'])
 
 @app.route("/data/listings")
 def listings():
     price = pd.read_sql("select * from listings;", con=engine).to_json(index=False,orient="table")
-    listings = json.loads(data)
+    listings = json.loads(price)
  
-    return jsonify(listings['price'])
+    return jsonify(listings['data'])
 
 
 if __name__ == "__main__":
